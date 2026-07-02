@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+
+  # PostgreSQL — un solo servidor, vamos a usar un schema por microservicio
+  postgres:
+    image: postgres:16
+    container_name: medic-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: medic_admin
+      POSTGRES_PASSWORD: medic_password
+      POSTGRES_DB: medic_appointments
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - medic-network
+
+  # RabbitMQ — incluye panel de administración web en el puerto 15672
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: medic-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: medic_admin
+      RABBITMQ_DEFAULT_PASS: medic_password
+    ports:
+      - "5672:5672"   # Puerto para que los microservicios se conecten
+      - "15672:15672" # Puerto del panel web de administración
+    networks:
+      - medic-network
+
+  # Redis — cache en memoria
+  redis:
+    image: redis:7-alpine
+    container_name: medic-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - medic-network
+
+volumes:
+  postgres_data:
+
+networks:
+  medic-network:
+    driver: bridge
