@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Application\DTOs\" />
+    <Folder Include="Application\UseCases\" />
   </ItemGroup>
 
 </Project>

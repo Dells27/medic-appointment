@@ -1,7 +1,6 @@
 ﻿namespace AuthService.Application.Interfaces
 {
-    public class test
+    public interface IUserRepository
     {
-        public string name { get; set; }
     }
 }
