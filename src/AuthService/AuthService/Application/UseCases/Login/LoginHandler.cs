@@ -1,5 +1,6 @@
 ﻿using AuthService.Application.DTOs;
 using AuthService.Application.Interfaces;
+using AuthService.Domain.Entities;
 using BCrypt.Net;
 
 
