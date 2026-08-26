@@ -1,6 +1,6 @@
 ﻿
 
-namespace Doctor.Domain.Entities;
+namespace DoctorService.Domain.Entities;
 
 public class Doctor
 {

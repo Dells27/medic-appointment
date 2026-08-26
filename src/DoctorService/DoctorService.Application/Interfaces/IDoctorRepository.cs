@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DoctorService.Domain.Entities;
 
 namespace DoctorService.Application.Interfaces
 {
-    internal interface IDoctorRepository
+    public interface IDoctorRepository
     {
+        Task<Doctor?> GetByIdAsync(Guid id);
+        Task<Doctor?> GetByUserIdAsync(Guid userId);
+        Task<List<Doctor>> GetAllAsync();
+        Task<List<Doctor>> GetBySpecialtyAsync(string specialty);
+        Task<bool> ExistsAsync(Guid userId);
+        Task AddAsync(Doctor doctor);
+        Task SaveChangesAsync();
     }
 }
