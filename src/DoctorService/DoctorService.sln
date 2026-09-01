@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorService.API", "DoctorService.API\DoctorService.API.csproj", "{1CA1AE3C-6E49-49FC-97A6-BC776AF8401D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorService.Application", "DoctorService.Application\DoctorService.Application.csproj", "{6CD9B6B8-5545-498D-B3B6-7F9CFD1BD370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doctor.Domain", "Doctor.Domain\Doctor.Domain.csproj", "{2CCA7F79-ABB4-44BB-BE2C-58D8F98FCCDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorService.Domain", "Doctor.Domain\DoctorService.Domain.csproj", "{2CCA7F79-ABB4-44BB-BE2C-58D8F98FCCDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doctor.Infrastructure", "Doctor.Infrastructure\Doctor.Infrastructure.csproj", "{A03A0FC3-2B76-43F5-A5FD-21B475754C67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorService.Infrastructure", "Doctor.Infrastructure\DoctorService.Infrastructure.csproj", "{A03A0FC3-2B76-43F5-A5FD-21B475754C67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

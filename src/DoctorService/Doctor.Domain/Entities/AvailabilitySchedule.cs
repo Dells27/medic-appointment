@@ -1,7 +1,7 @@
 ﻿
 
-namespace DoctorService.Domain.Entities
-{
+namespace DoctorService.Domain.Entities;
+
     public class AvailabilitySchedule
     {
         public Guid Id { get; private set; }
@@ -38,4 +38,4 @@ namespace DoctorService.Domain.Entities
         public void Deactivate () => IsActive = false;
 
     }
-}
+

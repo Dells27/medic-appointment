@@ -31,21 +31,34 @@ namespace AuthService.API.Controllers
         // Registra un nuevo usuario
         // ============================================================
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        // POST /api/auth/register/patient
+        [HttpPost("register/patient")]
+        public async Task<IActionResult> RegisterPatient([FromBody] RegisterRequest request)
         {
             try
             {
-                var response = await _registerHandler.Handle(request);
+                var response = await _registerHandler.Handle(request, "Patient");
                 return Ok(response);
-
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
 
-
+        // POST /api/auth/register/doctor
+        [HttpPost("register/doctor")]
+        public async Task<IActionResult> RegisterDoctor([FromBody] RegisterRequest request)
+        {
+            try
+            {
+                var response = await _registerHandler.Handle(request, "Doctor");
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPost("login")]

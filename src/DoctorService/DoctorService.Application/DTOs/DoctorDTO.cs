@@ -1,10 +1,13 @@
 ﻿
 
+using System.Text.Json.Serialization;
+
 namespace DoctorService.Application.DTOs;
 
 //Crear perfil médico
 public class CreateDoctorRequest
 {
+    [JsonIgnore] // Swagger no lo muestra, el usuario no lo manda
     public Guid userId { get; set; }
     public string name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;

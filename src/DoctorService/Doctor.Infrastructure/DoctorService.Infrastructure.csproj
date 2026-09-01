@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Doctor.Domain\Doctor.Domain.csproj" />
+    <ProjectReference Include="..\Doctor.Domain\DoctorService.Domain.csproj" />
     <ProjectReference Include="..\DoctorService.Application\DoctorService.Application.csproj" />
   </ItemGroup>
 

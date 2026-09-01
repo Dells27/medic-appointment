@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Doctor.Infrastructure\Doctor.Infrastructure.csproj" />
+    <ProjectReference Include="..\Doctor.Infrastructure\DoctorService.Infrastructure.csproj" />
     <ProjectReference Include="..\DoctorService.Application\DoctorService.Application.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,4 @@
 ﻿
-
 namespace DoctorService.Domain.Entities;
 
 public class Doctor

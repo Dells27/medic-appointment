@@ -19,7 +19,7 @@ namespace AuthService.Application.UseCases.Register
             _jwtService = jwtService;
         }
 
-        public async Task<AuthResponse> Handle(RegisterRequest request)
+        public async Task<AuthResponse> Handle(RegisterRequest request, string role)
         {
             var exists = await _userRepository.ExistsAsync(request.Email);
             if (exists)
@@ -29,7 +29,7 @@ namespace AuthService.Application.UseCases.Register
 
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-            var user = User.Create(request.Email, passwordHash, request.Role, request.Name);
+            var user = User.Create(request.Email, passwordHash, role,  request.Name);
 
             await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAsync();
