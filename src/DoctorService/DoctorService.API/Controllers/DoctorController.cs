@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using DoctorService.Application.UseCases.GetDoctor;
+﻿using DoctorService.Application.DTOs;
 using DoctorService.Application.UseCases.CreateDoctor;
-using DoctorService.Application.DTOs;
+using DoctorService.Application.UseCases.GetDoctor;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DoctorService.API.Controllers
 {
@@ -33,7 +34,14 @@ namespace DoctorService.API.Controllers
             try
             {
                 // Leer UserId del token JWT automáticamente
-                var userIdClaim = User.FindFirst("sub")?.Value;
+                var userIdClaim = User.FindFirst("sub")?.Value
+                ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (userIdClaim is null)
+                    return Unauthorized(new { message = "Token inválido" });
+
+                var userId = Guid.Parse(userIdClaim);
+                request.userId = userId;
                 var response = await _createDoctorHandler.Handle(request);
                 return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
             }

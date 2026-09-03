@@ -30,6 +30,7 @@ builder.Services.AddScoped<GetDoctorHandler>();
 // El Doctor Service NO genera tokens, solo los valida
 // ============================================================
 var jwtSecret = builder.Configuration["Jwt:Secret"]!;
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddAuthentication(options =>
 {
