@@ -21,7 +21,7 @@ namespace PatientService.Domain.Entities
         public DateTime createdAt { get; private set; }
 
         private readonly List<MedicalDocument> _documents = new();
-        public IReadOnlyCollection<MedicalDocument> document => _documents.AsReadOnly();
+        public IReadOnlyCollection<MedicalDocument> Document => _documents.AsReadOnly();
 
 
         private Patient() { }
