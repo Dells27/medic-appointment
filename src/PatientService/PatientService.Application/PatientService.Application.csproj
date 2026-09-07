@@ -10,8 +10,4 @@
     <ProjectReference Include="..\PatientService.Domain\PatientService.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\" />
-  </ItemGroup>
-
 </Project>

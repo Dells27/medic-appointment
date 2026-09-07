@@ -25,7 +25,7 @@ namespace PatientService.Application.DTOs
     // Request para actualizar perfil
     public class UpdatePatientRequest
     {
-        public string FullName { get; set; } = string.Empty;
+        public string name { get; set; } = string.Empty;
         public string phoneNumber { get; set; } = string.Empty;
         public string? allergies { get; set; }
     }
@@ -35,8 +35,8 @@ namespace PatientService.Application.DTOs
     public class PatientResponse
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public string FullName { get; set; } = string.Empty;
+        public Guid userId { get; set; }
+        public string name { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
         public DateTime dateOfBirth { get; set; }
         public string phoneNumber { get; set; } = string.Empty;
@@ -54,7 +54,7 @@ namespace PatientService.Application.DTOs
         public string fileType { get; set; } = string.Empty;
         public string documentType { get; set; } = string.Empty;
         public long fileSize { get; set; }
-        public DateTime puLoadedAt { get; set; }
+        public DateTime upLoadedAt { get; set; }
         public string? downLoadUrl { get; set; } // URL pre-firmada de S3
     }
 }
