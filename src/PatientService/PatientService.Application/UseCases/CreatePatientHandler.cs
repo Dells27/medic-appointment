@@ -44,7 +44,15 @@ namespace PatientService.Application.UseCases
             return MapToResponse(patient);
 ;        }
 
-            
+        public async Task<PatientResponse> GetByUserId(Guid userId)
+        {
+            var patient = await _patientRepository.GetByUserId(userId);
+            if (patient is null)
+                throw new Exception("Perfil de paciente no encontrado");
+
+            return MapToResponse(patient);
+        }
+
         public static PatientResponse MapToResponse(Patient patient)
         {
             return new PatientResponse {
