@@ -10,7 +10,7 @@ namespace PatientService.Application.Interfaces
     public interface IPatientRepository
     {
          Task<Patient?> GetByIdAsync(Guid id);
-         Task<Patient?> GetByUserId(Guid userId);
+         Task<Patient?> GetByUserIdAsync(Guid userId);
          Task<bool> ExistsAsync(Guid userDd);
         Task AddAsync(Patient entity);
         Task SaveChangesAsync();

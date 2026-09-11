@@ -20,14 +20,14 @@ namespace PatientService.Infrastructure.Data
         }
 
 
-        public async Task<Patient?> GetByIdAsync (Guid id)
+        public async Task<Patient?> GetByIdAsync(Guid id)
         {
             return await _context.Patients
                 .Include(p => p.Document)
                 .FirstOrDefaultAsync(p => p.id == id);
         }
 
-        public async Task<Patient?> GetByUserId(Guid userId)
+        public async Task<Patient?> GetByUserIdAsync(Guid userId)
         {
             return await _context.Patients
                 .Include(p => p.Document)

@@ -40,6 +40,10 @@ namespace PatientService.Infrastructure.Data
                       .WithOne()
                       .HasForeignKey(d => d.patientId)
                       .OnDelete(DeleteBehavior.Cascade);
+                entity.Navigation(p => p.Document)
+      .HasField("_documents")
+      .UsePropertyAccessMode(PropertyAccessMode.Field);
+
 
                 entity.HasIndex(p => p.userId).IsUnique();
             });

@@ -9,7 +9,7 @@ namespace PatientService.Application.Interfaces
 {
     // Contrato para interactuar con AWS S3
     // Application no sabe que existe S3 — solo sabe que existe algo que sube archivos
-    public interface IS3service
+    public interface IS3Service
     {
         // Sube un archivo a S3 y devuelve el key del archivo
         Task<string> UploadFileAsync(Stream FileStream, string FileName, string ContentType);

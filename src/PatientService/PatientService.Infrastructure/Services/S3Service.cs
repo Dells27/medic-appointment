@@ -11,7 +11,7 @@ using PatientService.Application.Interfaces;
 
 namespace PatientService.Infrastructure.Services
 {
-    public class S3Service : IS3service
+    public class S3Service : IS3Service
     {
 
         private readonly IAmazonS3 _s3Client;

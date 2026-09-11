@@ -40,7 +40,7 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 // 3. INYECCIÓN DE DEPENDENCIAS
 // ============================================================
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-builder.Services.AddScoped<S3Service>();
+builder.Services.AddScoped<IS3Service, S3Service>();
 builder.Services.AddScoped<CreatePatientHandler>();
 builder.Services.AddScoped<UploadDocumentHandler>();
 

@@ -44,14 +44,18 @@ namespace PatientService.Application.UseCases
             return MapToResponse(patient);
 ;        }
 
-        public async Task<PatientResponse> GetByUserId(Guid userId)
+        public async Task<PatientResponse> GetByUserIdAsync(Guid userId)
         {
-            var patient = await _patientRepository.GetByUserId(userId);
+            var patient = await _patientRepository.GetByUserIdAsync(userId);
             if (patient is null)
                 throw new Exception("Perfil de paciente no encontrado");
 
             return MapToResponse(patient);
         }
+
+
+        
+
 
         public static PatientResponse MapToResponse(Patient patient)
         {
@@ -76,9 +80,34 @@ namespace PatientService.Application.UseCases
                 }).ToList()
             };
         }
-        
 
-        
+        public async Task<List<MedicalDocumentResponse>> GetDocuments(Guid userId, IS3Service s3Service)
+        {
+            var patient = await _patientRepository.GetByUserIdAsync(userId);
+            if (patient is null)
+                throw new Exception("Perfil de paciente no encontrado");
+
+            var documents = new List<MedicalDocumentResponse>();
+
+            foreach (var doc in patient.Document)
+            {
+                var downloadUrl = await s3Service.GeneratePresignedUrlAsync(doc.fileKey);
+
+                documents.Add(new MedicalDocumentResponse
+                {
+                    Id = doc.id,
+                    fileName = doc.fileName,
+                    fileType = doc.fileType,
+                    documentType = doc.documentType,
+                    fileSize = doc.fileSize,
+                    upLoadedAt = doc.uploadedAt,
+                    downLoadUrl = downloadUrl
+                });
+
+            }
+            return documents;
+        }
+
 
     }
 }

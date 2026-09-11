@@ -5,6 +5,7 @@ using PatientService.Application.DTOs;
 using PatientService.Application.UseCases;
 using PatientService.Application.UseCases.UploadDocument;
 using System.Security.Claims;
+using PatientService.Application.Interfaces;
 
 namespace PatientService.API.Controllers
 {
@@ -16,7 +17,7 @@ namespace PatientService.API.Controllers
         private readonly CreatePatientHandler _createPatientHandler;
         private readonly UploadDocumentHandler _uploadDocumentHandler;
 
-        public PatientController (CreatePatientHandler createPatientHandler, UploadDocumentHandler uploadDocumentHandler)
+        public PatientController(CreatePatientHandler createPatientHandler, UploadDocumentHandler uploadDocumentHandler)
         {
             _createPatientHandler = createPatientHandler;
             _uploadDocumentHandler = uploadDocumentHandler;
@@ -35,7 +36,7 @@ namespace PatientService.API.Controllers
             {
                 var userIdClaim = User.FindFirst("sub")?.Value ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (userIdClaim is null)
-                    return Unauthorized(new { message = "Token invalido"});
+                    return Unauthorized(new { message = "Token invalido" });
 
                 request.userId = Guid.Parse(userIdClaim);
                 var response = await _createPatientHandler.Handle(request);
@@ -64,7 +65,7 @@ namespace PatientService.API.Controllers
                     return Unauthorized(new { message = "Token inválido" });
 
                 var userId = Guid.Parse(userIdClaim);
-                var response = await _createPatientHandler.GetByUserId(userId);
+                var response = await _createPatientHandler.GetByUserIdAsync(userId);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -109,5 +110,31 @@ namespace PatientService.API.Controllers
             }
         }
 
+        // GET /api/patients/documents
+        [HttpGet("documents")]
+        [Authorize(Roles = "Patient")]
+        public async Task<IActionResult> GetDocuments([FromServices] IS3Service s3Service)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst("sub")?.Value
+                      ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (userIdClaim is null)
+                    return Unauthorized(new { message = "Token inválido" });
+
+                var userId = Guid.Parse(userIdClaim);
+                var documents = await _createPatientHandler.GetDocuments(userId, s3Service);
+                return Ok(documents);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+
+
+
+        }
     }
 }

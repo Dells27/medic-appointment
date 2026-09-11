@@ -52,6 +52,11 @@ namespace PatientService.Domain.Entities
 
         }
 
+        public void AddDocument(MedicalDocument document)
+        {
+            _documents.Add(document);
+        }
+
     }
 
 
