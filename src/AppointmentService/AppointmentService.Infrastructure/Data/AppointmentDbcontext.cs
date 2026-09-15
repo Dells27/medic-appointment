@@ -1,0 +1,41 @@
+﻿using AppointmentService.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace AppointmentService.Infrastructure.Data;
+
+public class AppointmentDbContext : DbContext
+{
+    public AppointmentDbContext(DbContextOptions<AppointmentDbContext> options) : base(options) { }
+
+    public DbSet<Appointment> Appointments => Set<Appointment>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Appointment>(entity =>
+        {
+            entity.ToTable("appointments");
+            entity.HasKey(a => a.Id);
+
+            entity.Property(a => a.Id).HasColumnName("id");
+            entity.Property(a => a.patientId).HasColumnName("patient_id");
+            entity.Property(a => a.doctorId).HasColumnName("doctor_id");
+            entity.Property(a => a.appointmentDate).HasColumnName("appointment_date");
+            entity.Property(a => a.appointmentTime).HasColumnName("appointment_time");
+            entity.Property(a => a.status)
+                  .HasColumnName("status")
+                  .HasConversion<string>(); // Guarda el enum como texto legible
+            entity.Property(a => a.reason).HasColumnName("reason");
+            entity.Property(a => a.cancellationReason).HasColumnName("cancellation_reason");
+            entity.Property(a => a.createdAt).HasColumnName("created_at");
+            entity.Property(a => a.updatedAt).HasColumnName("updated_at");
+
+            // ⚠️ Constraint único — evita race conditions
+            // Un mismo médico no puede tener 2 citas en el mismo horario
+            entity.HasIndex(a => new { a.doctorId, a.appointmentDate, a.appointmentTime })
+                  .IsUnique()
+                  .HasFilter("status != 'Cancelled'");
+        });
+    }
+}
