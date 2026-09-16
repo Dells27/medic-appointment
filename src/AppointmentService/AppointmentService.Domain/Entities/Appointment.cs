@@ -52,7 +52,7 @@ namespace AppointmentService.Domain.Entities
             if (status != AppointmentStatus.Scheduled)
                 throw new Exception("Solo se pueden confirmar citas agendadas");
 
-            status= AppointmentStatus.Scheduled;
+            status = AppointmentStatus.Confirmed;
             updatedAt = DateTime.UtcNow;
         }
 
@@ -66,7 +66,7 @@ namespace AppointmentService.Domain.Entities
 
         public void Cancel (string reason)
         {
-            if (status != AppointmentStatus.Completed)
+            if (status == AppointmentStatus.Completed)
                 throw new Exception("No se puede cancelar una cita completada");
             status= AppointmentStatus.Cancelled;
             cancellationReason = reason;

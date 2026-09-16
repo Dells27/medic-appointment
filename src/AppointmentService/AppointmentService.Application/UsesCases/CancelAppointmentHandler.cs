@@ -1,8 +1,10 @@
 ﻿using AppointmentService.Application.DTOs;
 using AppointmentService.Application.Interfaces;
 using AppointmentService.Application.UseCases.CreateAppointment;
+using AppointmentService.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
