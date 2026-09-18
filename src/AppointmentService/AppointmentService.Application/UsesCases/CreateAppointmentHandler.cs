@@ -74,7 +74,9 @@ public class CreateAppointmentHandler
             patientId = appointment.patientId,
             doctorId = appointment.doctorId,
             appointmentDate = appointment.appointmentDate,
-            appointmentTime = appointment.appointmentTime
+            appointmentTime = appointment.appointmentTime,
+                PatientEmail = request.PatientEmail
+
         });
 
         return MapToResponse(appointment);

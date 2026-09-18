@@ -10,4 +10,8 @@
     <ProjectReference Include="..\NotificationService.Domain\NotificationService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UsesCases\" />
+  </ItemGroup>
+
 </Project>

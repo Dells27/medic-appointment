@@ -12,6 +12,9 @@ namespace AppointmentService.Application.DTOs
     {
         [JsonIgnore]
         public Guid PatientID { get; set; }
+        [JsonIgnore]
+        public string PatientEmail { get; set; } = string.Empty;
+
         public Guid doctorId { get; set; }
         public DateTime appointmentDate { get; set; }
         public TimeOnly appointmentTime { get; set; }
@@ -51,6 +54,8 @@ namespace AppointmentService.Application.DTOs
         public Guid doctorId { get; set; }
         public DateTime appointmentDate { get; set; }
     public TimeOnly appointmentTime{ get; set; }
+        public string PatientEmail { get; set; } = string.Empty;
+
     }
 
 
